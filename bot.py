@@ -1,16 +1,16 @@
 import telebot
 from telebot import types
 
-from modules import config, decorate
-from modules.config import TOKEN
+import config
+from config import TOKEN
 
-from modules.get_content import *
+from modules import *
 
 bot = telebot.TeleBot(TOKEN)
 
 
 @bot.message_handler(commands=['start'])
-def start(message):
+def main(message):
     signs_btn = types.InlineKeyboardMarkup(row_width=2)
     aries = types.InlineKeyboardButton(f"{decorate.aries}", callback_data='aries')
     taurus = types.InlineKeyboardButton(f"{decorate.taurus}", callback_data='taurus')

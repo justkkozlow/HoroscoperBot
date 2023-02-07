@@ -1,7 +1,7 @@
 import requests
 from bs4 import BeautifulSoup as Bs
 
-from sign_db import *
+from modules.sign_db import *
 
 
 def start_content(url):
