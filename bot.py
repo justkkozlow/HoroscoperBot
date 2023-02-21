@@ -84,18 +84,18 @@ def subscribe(callback):
                      )
     if callback.data == 'no':
         goodbye_bot(callback)
-    # else:
-    #     id_save = open("id.txt", "w", encoding="utf-8").write(f"{callback.message.chat.id}")
-    #     bot.send_message(callback.message.chat.id,
-    #                      text='Уведомления включены. Для отмены уведомлений введите /unsubscribe')
+    else:
+        id_save = open("id.txt", "w", encoding="utf-8").write(f"{callback.message.chat.id}")
+        bot.send_message(callback.message.chat.id,
+                         text='Уведомления включены. Для отмены уведомлений введите /unsubscribe')
 
-    # def subs():
-    #     bot.send_message(callback.message.chat.id, text='Test')
-    #
-    # schedule.every(5).seconds.do(subs)
-    # while True:
-    #     schedule.run_pending()
-    #     time.sleep(1)
+    def subs():
+        bot.send_message(callback.message.chat.id, text='Test')
+
+    schedule.every(5).seconds.do(subs)
+    while True:
+        schedule.run_pending()
+        time.sleep(1)
 
 
 def goodbye_bot(callback):
