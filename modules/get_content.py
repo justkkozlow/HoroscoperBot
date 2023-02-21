@@ -1,20 +1,21 @@
 import requests
 from bs4 import BeautifulSoup as Bs
 
-URL = 'https://horo.mail.ru'
+URL = 'https://horo.mail.ru/'
 
 SIGNS = [
     'Овен', 'Телец', 'Близнецы', 'Рак', 'Лев', 'Дева', 'Весы', 'Скорпион', 'Стрелец', 'Козерог', 'Водолей', 'Рыбы'
 ]
 
+signs_urls = []
+
 
 def sign_list(url):
     """
-    Функция обрабатывает URL-адрес, парсит имеющиеся ссылки на знаки зодиака и помещает их в словарь.
+    Функция обрабатывает URL-адрес, парсит ссылки на знаки зодиака и помещает их в словарь.
     :param url: URL
     :return sign_db:
     """
-    signs_urls = []
 
     r = requests.get(url)
     soup = Bs(r.text, 'html.parser')
@@ -22,7 +23,8 @@ def sign_list(url):
                           class_='p-imaged-item p-imaged-item_circle p-imaged-item_rune p-imaged-item_shadow_inner')
     for i in links:
         urls_list = f'{url}{i["href"]}'
-        signs_urls.append(urls_list)
+        clear_link = urls_list.replace('today/', '')
+        signs_urls.append(clear_link)
 
     sign_db = dict(zip(SIGNS, signs_urls))
     return sign_db
@@ -31,7 +33,7 @@ def sign_list(url):
 def content(callback):
     """
     Функция принимает выбранный знак зодиака,
-    находит, по ключу, ссылку на его страницу возвращает текст
+    находит, по ключу, ссылку на его страницу и возвращает текст
 
     :param callback: полученное значение знака зодиака из функции sign_content
     :return: Обработанный текст
